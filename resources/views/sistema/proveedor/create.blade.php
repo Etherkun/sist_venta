@@ -16,7 +16,7 @@
 
 			{!! Form::open(array('url'=>'sistema/proveedor', 'method'=>'POST', 'autocomplete'=>'off')) !!}
 			{{Form::token()}}
-			
+
 				<div class="form-group">
 					<label for="nombre">Nombre</label>
 					<input type="text" name="nombre" onkeypress="return soloLetras(event)" class="form-control" placeholder="Nombre del proveedor ...">
@@ -40,6 +40,7 @@
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
 					<button class="btn btn-danger" type="reset">Cancelar</button>
+                    <button class="btn btn-warning" type="return">Cancelar</button>
 				</div>
 
 			{!! Form::close() !!}
@@ -62,9 +63,9 @@ function soloLetras(e){
      	if(key == especiales[i]){
   			tecla_especial = true;
   			break;
-        } 
+        }
  	}
- 
+
     if(letras.indexOf(tecla)==-1 && !tecla_especial)
  		return false;
  }

@@ -30,7 +30,7 @@ class UserController extends Controller
             ->paginate(7);
 
             return view('sistema.usuario.index',["usuarios"=>$usuarios,'searchText'=>$query]);
-        }        
+        }
     }
 
     /**
@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function store(UserFormRequest $request)
     {
-        
+ 
         $usuario = new User;
         $usuario->name = $request->get('name');
         $usuario->email = $request->get('email');
@@ -158,6 +158,6 @@ class UserController extends Controller
         $usuario->delete();
 
         return Redirect::to('sistema/usuario');
-    }   
+    }
 }
 

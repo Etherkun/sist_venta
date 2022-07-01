@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 @section ('contenido')
-	<!-- Datos del Cliente -->
+	<!-- Datos del Usuario -->
 	<div class="row">
 		<div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
 		</div>
@@ -18,7 +18,7 @@
 				<thead style="background-color: #A9D0F5;">
 					<th>Bitacora</th>
 				</thead>
-				
+
 				<tbody>
 				@foreach($bitacora as $bita)
 					<tr>

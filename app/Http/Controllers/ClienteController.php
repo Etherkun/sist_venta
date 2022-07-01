@@ -19,7 +19,7 @@ class ClienteController extends Controller
     }
 
     public function index(Request $request)
-    {   
+    {
         if($request){
             $query=trim($request->get('searchText'));
             $clientes=DB::table('cliente')->where('nombre','LIKE','%'.$query.'%')->orwhere('cedula_rif','LIKE','%'.$query.'%')->where('estado','=','0')->orderBy('idcliente','asc')->paginate(7);
@@ -36,6 +36,11 @@ class ClienteController extends Controller
 
     public function store(ClienteFormRequest $request)
     {
+        $request->validate([
+            'cedula_rif'=>'required|unique:cliente|max:11'
+        ]);
+
+
         $cliente = new Cliente;
         $cliente->nombre = $request->get('nombre');
         $cliente->cedula_rif = $request->get('cedula_rif');

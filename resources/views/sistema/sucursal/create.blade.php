@@ -16,7 +16,7 @@
 
 			{!! Form::open(array('url'=>'sistema/sucursal', 'method'=>'POST', 'autocomplete'=>'off')) !!}
 			{{Form::token()}}
-			
+
 				<div class="form-group">
 					<label for="nombre">Nombre</label>
 					<input type="text" name="nombre" class="form-control" placeholder="Nombre del proveedor ...">
@@ -40,6 +40,7 @@
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
 					<button class="btn btn-danger" type="reset">Cancelar</button>
+                    <button class="btn btn-warning" type="return">Cancelar</button>
 				</div>
 
 			{!! Form::close() !!}

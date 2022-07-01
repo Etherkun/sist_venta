@@ -16,7 +16,7 @@
 
 			{!! Form::open(array('url'=>'sistema/producto', 'method'=>'POST', 'autocomplete'=>'off', 'files' =>'true')) !!}
 			{{Form::token()}}
-			
+
 				<div class="form-group">
 					<label for="nombre">Código</label>
 					<input type="text" name="codigo" class="form-control" placeholder="Código del producto ...">
@@ -54,6 +54,7 @@
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Guardar</button>
 					<button class="btn btn-danger" type="reset">Cancelar</button>
+                    <button class="btn btn-warning" type="return">Cancelar</button>
 				</div>
 
 			{!! Form::close() !!}
