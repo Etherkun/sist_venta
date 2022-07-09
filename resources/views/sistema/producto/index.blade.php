@@ -12,7 +12,7 @@
 			<div class="responsive">
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<thead>
-						<th>Id</th>
+						<!-- <th>Id</th> -->
 						<th>Código</th>
 						<th>Título | Descripción</th>
 						<th>Precio (Bs)</th>
@@ -23,12 +23,12 @@
 
 					@foreach ($productos as $prod)
 						<tr>
-							<td>{{ $prod->codproducto }}</td>
+							<!-- <td>{{ $prod->codproducto }}</td> -->
 							<td>{{ $prod->codigo }}</td>
 							<td>{{ $prod->descripcion }}</td>
 							<td>{{ $prod->precio }}</td>
 							<td>
-								@if($prod->img_producto != '')	
+								@if($prod->img_producto != '')
 
 								@php
 									$url = Storage::url('app/public/'.$prod->img_producto);

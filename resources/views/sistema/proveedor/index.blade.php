@@ -12,7 +12,7 @@
 			<div class="responsive">
 				<table class="table table-striped table-bordered table-condensed table-hover">
 					<thead>
-						<th>Id</th>
+						<!-- <th>Id</th> -->
 						<th>Nombre</th>
 						<th>Rif</th>
 						<th>Dirección</th>
@@ -21,7 +21,7 @@
 
 					@foreach ($proveedores as $pro)
 						<tr>
-							<td>{{ $pro->id_proveedor }}</td>
+							<!-- <td>{{ $pro->id_proveedor }}</td> -->
 							<td>{{ $pro->nombre }}</td>
 							<td>{{ $pro->rif_proveedor }}</td>
 							<td>{{ $pro->direccion }}</td>
