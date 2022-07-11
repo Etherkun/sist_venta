@@ -42,7 +42,7 @@
 							<td>{{ $prod->existencia }}</td>
 							<td>
 								<a href="{{ action('App\Http\Controllers\ProductoController@edit', $prod->codproducto) }}"><button class="btn btn-info">Editar</button></a>
-								<a href="" data-target="#modal-delete-{{$prod->codproducto}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+								<!-- <a href="" data-target="#modal-delete-{{$prod->codproducto}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a> -->
 							</td>
 						</tr>
 						@include('sistema.producto.modal')

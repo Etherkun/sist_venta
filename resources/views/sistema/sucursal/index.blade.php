@@ -27,7 +27,7 @@
 							<td>{{ $suc->email }}</td>
 							<td>
 								<a href="{{ action('App\Http\Controllers\SucursalController@edit', $suc->id) }}"><button class="btn btn-info">Editar</button></a>
-								<a href="" data-target="#modal-delete-{{$suc->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+								<!-- <a href="" data-target="#modal-delete-{{$suc->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a> -->
 							</td>
 						</tr>
 						@include('sistema.sucursal.modal')
