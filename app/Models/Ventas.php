@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Permission\Traits\HasRoles;
 class Ventas extends Model
 {
     protected $table = 'ventas';
@@ -23,6 +23,6 @@ class Ventas extends Model
     ];
 
     protected $guarded = [
-        
+
     ];
 }
