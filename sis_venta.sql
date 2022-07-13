@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2022 a las 21:34:26
+-- Tiempo de generación: 13-07-2022 a las 19:25:15
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -81,7 +81,34 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2022_07_11_154619_create_permission_tables', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `team_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `team_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -101,6 +128,20 @@ CREATE TABLE `password_resets` (
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 ('rodomax6@gmail.com', '$2y$10$9YfnISO/49rSUn4dpvaSrO4.SL//Kq2lDNP.rwXKfuP6RHG3e2noS', '2022-06-12 21:28:28');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -170,6 +211,40 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre`, `rif_proveedor`, `direccion`,
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `team_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `team_id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'administrador', 'web', '2022-07-11 21:52:54', '2022-07-11 21:52:54'),
+(2, NULL, 'vendedor', 'web', '2022-07-11 21:52:54', '2022-07-11 21:52:54');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `sucursal`
 --
 
@@ -211,7 +286,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Rodolfo Pace', 'rodomax6@gmail.com', NULL, '$2y$10$62OFIf0Su137uTsQX69a.ui1XZRnjWFL0Tb9pENWWGCszf1ZMOaf2', 'eRUd5Ch2075fBDx7ZNsrWwjGRN9b3FBwk4Glzc5D3uTMzXbK5mEM1AFHdegL', '2022-05-18 03:55:14', '2022-05-18 03:55:14');
+(2, 'Rodolfo Pace', 'rodomax6@gmail.com', NULL, '$2y$10$62OFIf0Su137uTsQX69a.ui1XZRnjWFL0Tb9pENWWGCszf1ZMOaf2', 'h5kvcfCQ3NuHgyCbJy1TTcdN9hq98adkIm5d5o3PQOePGKZYyMrxs43aCigP', '2022-05-18 03:55:14', '2022-05-18 03:55:14'),
+(10, 'Dina Pace', 'rodolfoapace@gmail.com', NULL, '$2y$10$DN0Xpw8pUJdspJ0vN7LZgukTrNRh2iM9Llcfxynn1XuyrcM9tZVWi', NULL, '2022-07-11 21:59:12', '2022-07-11 21:59:12');
 
 -- --------------------------------------------------------
 
@@ -329,7 +405,10 @@ INSERT INTO `usuario_bitacora` (`id_bitacora`, `nombre_usuario`, `email_usuario`
 (95, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace modificó el registro del producto 7087939 - Cuerpo acelerador Fiat Palio Racing, en fecha: 2022-06-30 20:55:55', '2022-06-30 20:55:55', 2),
 (96, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace modificó el registro del producto 55190344 - Juego gomas de válvulas motor 1.4cc Palio / Siena precio, en fecha: 2022-06-30 21:01:07', '2022-06-30 21:01:07', 2),
 (97, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace creó un nuevo registro del usuario Rodolfo Pace Email: rodomax6e@gmail.com, en fecha: 2022-07-01 13:54:40', '2022-07-01 13:54:40', 2),
-(98, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace eliminó el registro del usuario Rodolfo Pace Email: rodomax6e@gmail.com, en fecha: 2022-07-01 13:54:46', '2022-07-01 13:54:46', 2);
+(98, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace eliminó el registro del usuario Rodolfo Pace Email: rodomax6e@gmail.com, en fecha: 2022-07-01 13:54:46', '2022-07-01 13:54:46', 2),
+(99, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace modificó el registro del cliente José Alvarez, Cédula / Rif: 20919612 en fecha: 2022-07-11 17:58:20', '2022-07-11 17:58:20', 2),
+(100, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace modificó el registro del proveedor REPUESTOS DUCATO CA, Rif: J-40017841-0, en fecha: 2022-07-11 17:58:49', '2022-07-11 17:58:49', 2),
+(101, 'Rodolfo Pace', 'rodomax6@gmail.com', '* Rodolfo Pace creó un nuevo registro del usuario Dina Pace Email: rodolfoapace@gmail.com, en fecha: 2022-07-11 17:59:12', '2022-07-11 17:59:12', 2);
 
 -- --------------------------------------------------------
 
@@ -416,10 +495,35 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`team_id`,`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_permission_id_foreign` (`permission_id`),
+  ADD KEY `model_has_permissions_team_foreign_key_index` (`team_id`);
+
+--
+-- Indices de la tabla `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`team_id`,`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
+  ADD KEY `model_has_roles_role_id_foreign` (`role_id`),
+  ADD KEY `model_has_roles_team_foreign_key_index` (`team_id`);
+
+--
 -- Indices de la tabla `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indices de la tabla `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
 -- Indices de la tabla `personal_access_tokens`
@@ -443,6 +547,21 @@ ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_proveedor`,`rif_proveedor`);
 
 --
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_team_id_name_guard_name_unique` (`team_id`,`name`,`guard_name`),
+  ADD KEY `roles_team_foreign_key_index` (`team_id`);
+
+--
+-- Indices de la tabla `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
 -- Indices de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
@@ -452,9 +571,8 @@ ALTER TABLE `sucursal`
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`,`name`,`email`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- Indices de la tabla `usuario_bitacora`
@@ -501,7 +619,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -522,6 +646,12 @@ ALTER TABLE `proveedor`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
@@ -531,13 +661,13 @@ ALTER TABLE `sucursal`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_bitacora`
 --
 ALTER TABLE `usuario_bitacora`
-  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
@@ -546,41 +676,27 @@ ALTER TABLE `ventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `venta_producto`
---
-ALTER TABLE `venta_producto`
-  MODIFY `id_venta_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `password_resets`
+-- Filtros para la tabla `model_has_permissions`
 --
-ALTER TABLE `password_resets`
-  ADD CONSTRAINT `password_resets_ibfk_1` FOREIGN KEY (`email`) REFERENCES `users` (`email`);
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `producto`
+-- Filtros para la tabla `model_has_roles`
 --
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id`);
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `ventas`
+-- Filtros para la tabla `role_has_permissions`
 --
-ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id`),
-  ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
-
---
--- Filtros para la tabla `venta_producto`
---
-ALTER TABLE `venta_producto`
-  ADD CONSTRAINT `venta_producto_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`),
-  ADD CONSTRAINT `venta_producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`codproducto`);
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
