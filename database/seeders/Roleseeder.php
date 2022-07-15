@@ -18,7 +18,7 @@ class Roleseeder extends Seeder
     {
         //Roles y Permisos
         // Admin -> all
-        // Vendedor -> Vender, Registrar clientes y Productos
+        // Vendedor -> Vender, Registrar clientes 
 
         $admin = role::create(['name'=>'administrador']);
         $vendedor = role::create(['name'=>'vendedor']);
