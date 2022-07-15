@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-     /*    // Roles y Permisos
-            $this->call(Roleseeder::class);
+         // Roles y Permisos
+             $this->call(Roleseeder::class);
             // Usuario Rol
-            $this->call(Userseeder::class); */
+           /*  $this->call(Userseeder::class); */
 
     }
 }

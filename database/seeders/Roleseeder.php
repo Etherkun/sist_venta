@@ -25,7 +25,15 @@ class Roleseeder extends Seeder
 
         // Permisos
 
-
+        Permission::create(['name'=>'home'])->syncRoles($admin,$vendedor);
+        Permission::create(['name'=>'sistema.usuario.update'])->assignRole($admin);
+        Permission::create(['name'=>'sistema.usuario.show'])->assignRole($admin);;
+        Permission::create(['name'=>'sistema.cliente.update'])->syncRoles($admin,$vendedor);
+        Permission::create(['name'=>'sistema.proveedor.update'])->assignRole($admin);
+        Permission::create(['name'=>'sistema.sucursal.update'])->assignRole($admin);
+        Permission::create(['name'=>'sistema.producto.update'])->assignRole($admin);
+        Permission::create(['name'=>'sistema.venta.update'])->syncRoles($admin,$vendedor);
+        Permission::create(['name'=>'sistema.venta.show'])->syncRoles($admin,$vendedor);
 
     }
 }
